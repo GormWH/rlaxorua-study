@@ -32,9 +32,9 @@ Nomad Coders의 '개발자를 위한 윈도우 셋업'을 직접 들으면서 �
 
 윈도우 셋업에 관한 강의지만 vsc, zsh 설정이나 nvm을 이용한 node 버전 관리 등은 맥에서도 충분히 활용 가능한 내용들이다.
 
-### 1-1. Chrome, VSC 설치
+### 1-1. Chrome, Git, VSC 설치
 
-크롬 브라우저와 Visual Studio Code를 검색해 설치한다.  
+크롬 브라우저와 Git, Visual Studio Code를 검색해 설치한다.  
 **VSC설치시 설치 옵션을 선택하는 부분이 있는데 전부 다 체크해서 설치하는 것이 좋다.**  
 VSC는 코딩을 편리하게 해줄 각종 extension도 설치한다.
 
@@ -138,4 +138,121 @@ VSC 그리고 Windows Terminal에서 폰트를 위에서 다운 받은 MesloLGS 
 - Visual Studio Code: Open File → Preferences → Settings (PC) or Code → Preferences → Settings (Mac), enter terminal.integrated.fontFamily in the search box at the top of Settings tab and set the value below to MesloLGS NF.
 - Windows Terminal by Microsoft (the new thing): Open settings.json (Ctrl+Shift+,), search for fontFace and set the value to MesloLGS NF for every profile. If you don't find fontFace, add it under profiles → defaults.
 
-여기까지 완료 후 터미널에 들어가보면 powerlevel10k 설정 화면이 뜰텐데 원하는 대로 설정하면 된다.
+여기까지 완료 후 터미널에 들어가보면 powerlevel10k 설정 화면이 뜨는데 원하는 대로 설정하면 된다.
+
+### 1-5. 리눅스 튜토리얼
+
+리눅스 내부(`/home/`)에 작업 파일들을 두면 WSL환경에 문제가 생겼을 때 파일들이 날라갈 수 있기 떄문에 윈도우(`/mnt/c/`)에 작업 파일을 둘 것을 권장하고 있다.
+
+> 리눅스에서 많이 사용하는 명령어들
+
+- ls
+- cd
+- mv
+- touch
+- mkdir
+- rm
+
+> `ls`(list)
+
+현재 디렉토리 내에 있는 파일, 폴더를 터미널에 출력한다.  
+`.`으로 시작하는 파일들은 숨겨져 있어서 `ls` 만으론 볼 수 없는 경우가 있는데 `ls -a` 라고 입력하면 숨겨진 파일들도 표시할 수 있다.
+
+> `cd`(change directory)
+
+`cd` 뒤에 이동하고자 하는 디렉토리를 입력하면 그 디렉토리로 이동한다.
+
+> `mv`(move)
+
+`mv <현재 파일위치/파일명> <이동 후 파일위치/파일명>`  
+위와 같이 입력해 파일을 이동시키거나, 이름을 변경할 수 있다.
+
+> touch
+
+`touch <파일명>`으로 파일을 생성할 수 있다.
+
+> mkdir
+
+`mkdir <폴더명>`으로 폴더를 생성할 수 있다.
+
+> rm
+
+`rm <파일명>` 혹은 `rm -rf <폴더명>`으로 파일 혹은 폴더를 삭제할 수 있다.
+
+### 1-6. deadsnakes를 이용한 Python 설치(Ubuntu에서만 가능)
+
+deadsnakes(<https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa>)  
+deadsnakes팀의 ppa를 이용해 다양한 버전의 파이썬을 설치 그리고 필요에 따라 변경해서 사용할 수 있다.
+
+```
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+```
+
+공식 문서 내용에 따라 위 코드를 입력하면 deadsnakes팀에서 만든 설치 리스트를 Ubuntu에서 인식할 수 있게 된다.
+
+이제 Python을 어디에서 다운 받아야할지 Ubuntu에서 알기 때문에  
+`sudo apt-get install python3.8`  
+라고 입력해 Python3.8을 다운 받는다.  
+(3.9도 다운 가능하지만 그냥 3.8 했다)
+
+### 1-7. nvm을 이용한 Node.JS설치
+
+강의에서는 Node.JS만 따로 설치한 뒤 나중에 nvm을 이용한 설치를 알려줬는데 단독 설치 부분은 그냥 강의로만 보고 nvm으로만 설치하는걸 추천한다.
+
+nvm git(<https://github.com/nvm-sh/nvm>)  
+공식 문서 내용에 따라 진행한다.
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+```
+
+위 코드를 입력하면 nvm 설치 및 shell command가 추가된다.
+
+이제 새로운 terminal을 열어서 nvm을 이용해 node를 설치해준다.  
+LTS버전을 설치하는걸 추천하는데
+
+```bash
+nvm install 'lts/*'
+```
+
+라고 입력하면 lts버전 중 가장 최근 버전이 자동으로 선택되어 설치를 시작한다.  
+설치된 node 목록을 보기 위해 `nvm ls`라고 입력해 현재 설치된 버전을 확인하고
+
+```bash
+nvm alias default 16.13.2(본인 버전)
+```
+
+라고 입력해 기본으로 설정할 버전을 명시해 준다.  
+(하나만 설치하면 그게 기본 설정이 되어있긴 한데 나중에 다른 버전 설치 시를 대비해 그냥 설정 해주자)
+
+### 1-8. git, github CLI 설치
+
+강의를 보고 잘 따라하면 된다.
+
+Github CLI(<https://github.com/cli/cli>)  
+Github CLI Linux install(<https://github.com/cli/cli/blob/trunk/docs/install_linux.md>)
+
+Github CLI Linux install공식 문서를 따라 아래 4줄을 입력하면 설치 완료.
+
+```bash
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/etc/apt/trusted.gpg.d/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/trusted.gpg.d/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+sudo apt update
+sudo apt install gh
+```
+
+Github 아이디가 없다면 만들고
+
+```bash
+git config --global user.name "<사용하고 싶은 유저명>"
+git config --global user.email "<github아이디 연동된 이메일>"
+```
+
+까지 입력해 git초기 설정.
+
+```bash
+gh auth login
+```
+
+을 입력해 github아이디랑 github cli랑 연동 시켜둔다.
